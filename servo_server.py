@@ -28,9 +28,9 @@ def setServoPulse(channel, pulse):
 
 pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
 servo = 300
-pwm.setPWM(0, 0, 150)
+pwm.setPWM(0, 0, 500)
 time.sleep(2)
-pwm.setPWM(0, 0, 300)
+
 
 
 HOST = ''                 # Symbolic name meaning all available interfaces
