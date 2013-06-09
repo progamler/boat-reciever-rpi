@@ -27,8 +27,24 @@ def setServoPulse(channel, pulse):
   pwm.setPWM(channel, 0, pulse)
 
 pwm.setPWMFreq(60)                        # Set frequency to 60 Hz
-servo = 300
-pwm.setPWM(0, 0, 500)
+servo = 500
+pwm.setPWM(0, 0, 375)
+pwm.setPWM(1, 0, 375)
+pwm.setPWM(2, 0, 375)
+pwm.setPWM(3, 0, 375)
+pwm.setPWM(4, 0, 375)
+pwm.setPWM(5, 0, 375)
+pwm.setPWM(6, 0, 375)
+pwm.setPWM(7, 0, 375)
+pwm.setPWM(8, 0, 375)
+pwm.setPWM(9, 0, 375)
+pwm.setPWM(10, 0, 375)
+pwm.setPWM(11, 0, 375)
+pwm.setPWM(12, 0, 375)
+pwm.setPWM(13, 0, 375)
+pwm.setPWM(14, 0, 375)
+pwm.setPWM(15, 0, 375)
+
 time.sleep(2)
 
 
@@ -41,20 +57,20 @@ s.listen(1)
 conn, addr = s.accept()
 print 'Connected by', addr
 while (True):
-  data = conn.recv(1024)
+  recv = conn.recv(1024)
+  print(recv.split(';')[0])
+  servo_id = int(recv.split(';')[0])
+  data = recv.split(';')[1]
   if not data: break
   conn.sendall(data)
   print(data)
-  if data.startswith("+"):
-    if servo < servoMax:
-      servo = servo+5
-  elif data == "quit":
-    print("quit\n")
-  else:
-    if servo > servoMin:
-      servo = servo-5
+  servo = int(data.split('.')[0])
+  #if servo > 150:
+  #    servo = 150
+  #if servo < 600:
+  #    servo = 600
   print(servo)
-  pwm.setPWM(0, 0, servo)
+  pwm.setPWM(servo_id, 0, servo)
   # Change speed of continuous servo on channel O
   #pwm.setPWM(0, 0, servoMin)
   #time.sleep(1)

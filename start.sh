@@ -1,3 +1,3 @@
 modprobe i2c-bcm2708
-python2 servo_server.py
+python2.7 servo_server.py
 
